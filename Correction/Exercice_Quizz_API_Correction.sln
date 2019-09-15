@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercice_Quizz_API_Correction", "Exercice_Quizz_API_Correction\Exercice_Quizz_API_Correction.csproj", "{F0C8BC63-A65C-45F8-BCAA-10B4A31F2601}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercice_Quizz_API_Test", "Exercice_Quizz_API_Test\Exercice_Quizz_API_Test.csproj", "{73460756-F02E-4441-90C9-ACBCD4C52F34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0C8BC63-A65C-45F8-BCAA-10B4A31F2601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C8BC63-A65C-45F8-BCAA-10B4A31F2601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C8BC63-A65C-45F8-BCAA-10B4A31F2601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C8BC63-A65C-45F8-BCAA-10B4A31F2601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73460756-F02E-4441-90C9-ACBCD4C52F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73460756-F02E-4441-90C9-ACBCD4C52F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73460756-F02E-4441-90C9-ACBCD4C52F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73460756-F02E-4441-90C9-ACBCD4C52F34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4675D0CF-DB5A-4FA8-8D1D-CD2F14FF6C4D}
+	EndGlobalSection
+EndGlobal
