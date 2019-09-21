@@ -9,13 +9,22 @@ using System.Threading.Tasks;
 
 namespace Exercice_Quizz_API.Repository
 {
-    public static class QuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
-        public static List<Question> GetAllQuestions(string path)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly string _path;
+
+        public QuestionRepository(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _path = hostingEnvironment.ContentRootPath + "/Json/Questions.json";
+        }
+
+        public List<Question> GetAllQuestions()
         {
             List<Question> items = new List<Question>();
 
-            using (StreamReader r = new StreamReader(path))
+            using (StreamReader r = new StreamReader(_path))
             {
                 string json = r.ReadToEnd();
                 items = JsonConvert.DeserializeObject<List<Question>>(json);
@@ -24,14 +33,14 @@ namespace Exercice_Quizz_API.Repository
             return items;
         }
 
-        public static Question GetQuestion(string path, int questionId)
+        public Question GetQuestion(int questionId)
         {
-            return GetAllQuestions(path).Where(x => x.QuestionId == questionId).SingleOrDefault();
+            return GetAllQuestions().Where(x => x.QuestionId == questionId).SingleOrDefault();
         }
 
-        public static List<Question> AddOrUpdateQuestion(string path, Question question)
+        public List<Question> AddOrUpdateQuestion(Question question)
         {
-            List<Question> questions = GetAllQuestions(path);
+            List<Question> questions = GetAllQuestions();
 
             if (question.QuestionId == 0)
             {
@@ -44,23 +53,23 @@ namespace Exercice_Quizz_API.Repository
                 questions[index] = question;
             }
 
-            return WriteInJsonAndReturn(path, questions);
+            return WriteInJsonAndReturn(_path, questions);
         }
 
-        public static List<Question> DeleteQuestion(string path, int questionId)
+        public List<Question> DeleteQuestion(int questionId)
         {
-            List<Question> questions = GetAllQuestions(path);
+            List<Question> questions = GetAllQuestions();
 
             Question questionToRemove = questions.Where(q => q.QuestionId == questionId).SingleOrDefault();
 
             questions.Remove(questionToRemove);
 
-            return WriteInJsonAndReturn(path, questions);
+            return WriteInJsonAndReturn(_path, questions);
         }
 
         #region Helpers
 
-        private static List<Question> WriteInJsonAndReturn(string path, List<Question> questions)
+        private List<Question> WriteInJsonAndReturn(string path, List<Question> questions)
         {
             string json = JsonConvert.SerializeObject(questions);
 

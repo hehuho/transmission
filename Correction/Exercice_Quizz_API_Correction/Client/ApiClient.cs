@@ -10,10 +10,9 @@ namespace Exercice_Quizz_API.Client
 {
     public partial class ApiClient
     {
-
         private readonly HttpClient _httpClient;
         private Uri BaseEndpoint { get; set; }
-
+        
         public ApiClient(Uri baseEndpoint)
         {
             BaseEndpoint = baseEndpoint ?? throw new ArgumentNullException("baseEndpoint");

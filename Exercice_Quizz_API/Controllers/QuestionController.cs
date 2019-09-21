@@ -14,19 +14,19 @@ namespace Exercice_Quizz_API_Vierge.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly string _path;
+        private readonly IQuestionRepository _questionRepository;
 
-        public QuestionController(IHostingEnvironment hostingEnvironment)
+        public QuestionController(IQuestionRepository questionRepository)
         {
-            _hostingEnvironment = hostingEnvironment;
-            _path = hostingEnvironment.ContentRootPath + "/Json/Questions.json";
+            _questionRepository = questionRepository;
         }
+
+
 
         // GET api/question/GetAll
         [HttpGet("getAll")]
         [Produces("application/json")]
-        public ActionResult GetAll()
+        public ActionResult<List<Question>> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -40,21 +40,21 @@ namespace Exercice_Quizz_API_Vierge.Controllers
 
         // POST api/question/addQuestion
         [HttpPost("addQuestion")]
-        public ActionResult Post([FromBody]JObject body)
+        public ActionResult<List<Question>> Post([FromBody]JObject body)
         {
             throw new NotImplementedException();
         }
 
         // PUT api/question/updateQuestion/5
         [HttpPut("updateQuestion/{id}")]
-        public ActionResult Put(int id, [FromBody]JObject body)
+        public ActionResult<List<Question>> Put(int id, [FromBody]JObject body)
         {
             throw new NotImplementedException();
         }
 
         // DELETE api/question/deleteQuestion/5
         [HttpDelete("deleteQuestion/{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult<List<Question>> Delete(int id)
         {
             throw new NotImplementedException();
         }

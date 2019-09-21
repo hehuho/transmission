@@ -1,4 +1,5 @@
 ﻿using Exercice_Quizz_API_Vierge.Model;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,34 @@ using System.Threading.Tasks;
 
 namespace Exercice_Quizz_API_Vierge.Repository
 {
-    public static class QuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
-        public static List<Question> GetAllQuestions(string path)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly string _path;
+
+        public QuestionRepository(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _path = hostingEnvironment.ContentRootPath + "/Json/Questions.json";
+        }
+
+
+        public List<Question> AddOrUpdateQuestion(Question question)
         {
             throw new NotImplementedException();
         }
 
-        public static Question GetQuestion(string path, int questionId)
+        public List<Question> DeleteQuestion(int questionId)
         {
             throw new NotImplementedException();
         }
 
-        public static List<Question> AddOrUpdateQuestion(string path, Question question)
+        public List<Question> GetAllQuestions()
         {
             throw new NotImplementedException();
         }
 
-        public static List<Question> DeleteQuestion(string path, int questionId)
+        public Question GetQuestion(int questionId)
         {
             throw new NotImplementedException();
         }
@@ -36,6 +47,7 @@ namespace Exercice_Quizz_API_Vierge.Repository
         {
             throw new NotImplementedException();
         }
+
 
         #endregion
     }

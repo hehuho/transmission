@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Exercice_Quizz_API.Model;
 using Exercice_Quizz_API.Repository;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Exercice_Quizz_API.Controllers
@@ -15,22 +10,20 @@ namespace Exercice_Quizz_API.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly string _path;
+        private readonly IQuestionRepository _questionRepository;
         
-        public QuestionController(IHostingEnvironment hostingEnvironment)
+        public QuestionController(IQuestionRepository questionRepository)
         {
-            _hostingEnvironment = hostingEnvironment;
-            _path = hostingEnvironment.ContentRootPath + "/Json/Questions.json";
+            _questionRepository = questionRepository;
         }
 
         // GET api/question/GetAll
         [HttpGet("getAll")]
         [Produces("application/json")]
-        public ActionResult GetAll()
+        public ActionResult<List<Question>> GetAll()
         {
-            if (QuestionRepository.GetAllQuestions(_path).Count > 0)
-                return Ok(QuestionRepository.GetAllQuestions(_path));
+            if (_questionRepository.GetAllQuestions().Count > 0)
+                return Ok(_questionRepository.GetAllQuestions());
             else
                 return BadRequest();
             
@@ -40,8 +33,8 @@ namespace Exercice_Quizz_API.Controllers
         [HttpGet("get/{id}")]
         public ActionResult<string> GetById(int id)
         {
-            if (QuestionRepository.GetQuestion(_path, id) != null)
-                return Ok(QuestionRepository.GetQuestion(_path, id));
+            if (_questionRepository.GetQuestion(id) != null)
+                return Ok(_questionRepository.GetQuestion(id));
             else
                 return BadRequest();
             
@@ -49,7 +42,7 @@ namespace Exercice_Quizz_API.Controllers
 
         // POST api/question/addQuestion
         [HttpPost("addQuestion")]
-        public ActionResult Post([FromBody]JObject body)
+        public ActionResult<List<Question>> Post([FromBody]JObject body)
         {
             int idParam = 0;
             return ExecuteRequestPostOrPut(body, idParam);
@@ -57,11 +50,14 @@ namespace Exercice_Quizz_API.Controllers
 
         // PUT api/question/updateQuestion/5
         [HttpPut("updateQuestion/{id}")]
-        public ActionResult Put(int id, [FromBody]JObject body)
+        public ActionResult<List<Question>> Put(int id, [FromBody]JObject body)
         {
             int idParam = id;
 
-            if (QuestionRepository.GetQuestion(_path, id) != null)
+            if (body.HasValues
+                && body.ContainsKey("QuestionIntitule")
+                && body.ContainsKey("Answer")
+                && _questionRepository.GetQuestion(id) != null)
                 return Ok(ExecuteRequestPostOrPut(body, idParam));
             else
                 return BadRequest();
@@ -69,10 +65,10 @@ namespace Exercice_Quizz_API.Controllers
 
         // DELETE api/question/deleteQuestion/5
         [HttpDelete("deleteQuestion/{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult<List<Question>> Delete(int id)
         {
-            if (QuestionRepository.GetQuestion(_path, id) != null)
-                return Ok(QuestionRepository.DeleteQuestion(_path, id));
+            if (_questionRepository.GetQuestion(id) != null)
+                return Ok(_questionRepository.DeleteQuestion(id));
             else
                 return BadRequest("La question n'existe pas ou a déjà été supprimée");
         }
@@ -92,7 +88,7 @@ namespace Exercice_Quizz_API.Controllers
         {
             //Check if question has already exist
             bool isQuestionExist = false;
-            List<Question> questions = QuestionRepository.GetAllQuestions(_path);
+            List<Question> questions = _questionRepository.GetAllQuestions();
             foreach (var questionItem in questions)
             {
                 if (questionItem.QuestionIntitule == questionEnter.QuestionIntitule)
@@ -105,13 +101,15 @@ namespace Exercice_Quizz_API.Controllers
 
         private ActionResult ExecuteRequestPostOrPut(JObject body, int idParam)
         {
-            if (body.HasValues)
+            if (body.HasValues
+                && body.ContainsKey("QuestionIntitule")
+                && body.ContainsKey("Answer"))
             {
                 Question questionEnter = MappingQuestion(idParam, body);
                 bool isQuestionExist = CheckIfQuestionExist(questionEnter);
 
                 if (isQuestionExist == false)
-                    return Ok(QuestionRepository.AddOrUpdateQuestion(_path, questionEnter));
+                    return Ok(_questionRepository.AddOrUpdateQuestion(questionEnter));
                 else
                     return BadRequest("La question existe déjà");
             }
