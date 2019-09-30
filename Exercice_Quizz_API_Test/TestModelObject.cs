@@ -1,6 +1,6 @@
 using System;
-using Exercice_Quizz_API_Vierge.Model;
-using Exercice_Quizz_API_Vierge.Client;
+using Exercice_Quizz_API.Model;
+using Exercice_Quizz_API.Client;
 using System.Reflection;
 using NUnit.Framework;
 

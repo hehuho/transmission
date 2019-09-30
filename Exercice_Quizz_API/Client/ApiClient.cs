@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercice_Quizz_API_Vierge.Client
+namespace Exercice_Quizz_API.Client
 {
     public partial class ApiClient
     {

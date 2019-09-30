@@ -1,4 +1,4 @@
-﻿using Exercice_Quizz_API_Vierge.Model;
+﻿using Exercice_Quizz_API.Model;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Exercice_Quizz_API_Vierge.Repository
+namespace Exercice_Quizz_API.Repository
 {
     public class QuestionRepository : IQuestionRepository
     {

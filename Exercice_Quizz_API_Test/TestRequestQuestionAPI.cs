@@ -1,9 +1,9 @@
 using AutoFixture;
 using Exercice_Quizz_API_Test.RepositoryFake;
-using Exercice_Quizz_API_Vierge.Client;
-using Exercice_Quizz_API_Vierge.Controllers;
-using Exercice_Quizz_API_Vierge.Model;
-using Exercice_Quizz_API_Vierge.Repository;
+using Exercice_Quizz_API.Client;
+using Exercice_Quizz_API.Controllers;
+using Exercice_Quizz_API.Model;
+using Exercice_Quizz_API.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

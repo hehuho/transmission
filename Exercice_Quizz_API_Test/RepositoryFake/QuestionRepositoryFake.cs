@@ -1,7 +1,8 @@
-﻿using Exercice_Quizz_API_Vierge.Model;
-using Exercice_Quizz_API_Vierge.Repository;
+﻿using Exercice_Quizz_API.Model;
+using Exercice_Quizz_API.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Exercice_Quizz_API_Test.RepositoryFake
@@ -25,22 +26,42 @@ namespace Exercice_Quizz_API_Test.RepositoryFake
 
         public List<Question> AddOrUpdateQuestion(Question question)
         {
-            throw new NotImplementedException();
+            List<Question> questions = GetAllQuestions();
+
+
+            if (question.QuestionId == 0)
+            {
+                question.QuestionId = questions.Last().QuestionId + 1;
+                questions.Add(question);
+            }
+            else
+            {
+                int index = questions.FindIndex(q => q.QuestionId == question.QuestionId);
+                questions[index] = question;
+            }
+
+            return questions;
         }
 
         public List<Question> DeleteQuestion(int questionId)
         {
-            throw new NotImplementedException();
+            List<Question> questions = GetAllQuestions();
+
+            Question questionToRemove = questions.Where(q => q.QuestionId == questionId).SingleOrDefault();
+
+            questions.Remove(questionToRemove);
+
+            return questions;
         }
 
         public List<Question> GetAllQuestions()
         {
-            throw new NotImplementedException();
+            return _questions;
         }
 
         public Question GetQuestion(int questionId)
         {
-            throw new NotImplementedException();
+            return GetAllQuestions().Where(x => x.QuestionId == questionId).SingleOrDefault();
         }
     }
 }

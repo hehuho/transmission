@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Exercice_Quizz_API_Vierge.Model
+namespace Exercice_Quizz_API.Model
 {
     public class Question
     {

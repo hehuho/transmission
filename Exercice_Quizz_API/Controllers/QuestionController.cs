@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Exercice_Quizz_API_Vierge.Model;
-using Exercice_Quizz_API_Vierge.Repository;
+using Exercice_Quizz_API.Model;
+using Exercice_Quizz_API.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace Exercice_Quizz_API_Vierge.Controllers
+namespace Exercice_Quizz_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

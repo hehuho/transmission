@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Exercice_Quizz_API_Vierge
+namespace Exercice_Quizz_API
 {
     public class Program
     {
